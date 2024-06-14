@@ -2,7 +2,7 @@ name: Create Weekly Release Branch
 
 on:
   schedule:
-    -  cron: '45 8 * * 5' # UTCの金曜日の8:45（JSTの17:30に対応）
+    -  cron: '30 8 * * 5' # UTCの金曜日の8:30（JSTの17:30に対応）
 
 jobs:
   create-branch:
@@ -18,7 +18,8 @@ jobs:
         id: date
         run: echo "::set-output name=date::$(date -v+7d +'%Y%m%d')"
 
-      - name: Create new branch
+      # 他レポジトリに導入する場合url部分を適切なものに変更する
+      - name: Create new branch 
         run: |
           BRANCH_NAME=release-${{ steps.date.outputs.date }}
           git checkout -b $BRANCH_NAME
