@@ -2,7 +2,7 @@ name: Create Weekly Release Branch
 
 on:
   schedule:
-    -  cron: '35 08 * * 5' # UTCの金曜日の8:30（JSTの17:30に対応）
+    -  cron: '42 8 * * 5' # UTCの金曜日の8:30（JSTの17:30に対応）
 
 jobs:
   create-branch:
@@ -16,12 +16,13 @@ jobs:
 
       - name: Get date one week from now
         id: date
-        run: echo "::set-output name=date::$(date -d '+7 days' +'%Y%m%d')"
+        run: echo "::set-output name=date::$(date -v+7d +'%Y%m%d')"
 
       - name: Create new branch
         run: |
           BRANCH_NAME=release-${{ steps.date.outputs.date }}
           git checkout -b $BRANCH_NAME
+          git remote set-url origin https://${{ github.actor }}:${{ secrets.GITHUB_TOKEN }}@github.com/whisky-shusuky/BranchCronGenerateTest.git
           git push origin $BRANCH_NAME
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
