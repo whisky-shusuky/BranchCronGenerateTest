@@ -1,0 +1,1 @@
+Github Actionsを使ってbranchを定期作成するサンプルコード
