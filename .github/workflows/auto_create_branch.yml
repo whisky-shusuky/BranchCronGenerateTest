@@ -2,7 +2,7 @@ name: Create Weekly Release Branch
 
 on:
   schedule:
-    -  cron: '42 8 * * 5' # UTCの金曜日の8:30（JSTの17:30に対応）
+    -  cron: '45 8 * * 5' # UTCの金曜日の8:45（JSTの17:30に対応）
 
 jobs:
   create-branch:
